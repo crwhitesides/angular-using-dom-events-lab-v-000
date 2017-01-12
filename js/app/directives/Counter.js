@@ -13,17 +13,22 @@ function Counter() {
 		},
 		controllerAs: 'ctrl',
 		link: function(scope, element, attrs, ctrl) {
-			document.addEventListener('click', function() {
+			function incrementCount() {
 				ctrl.count++;
 				scope.$apply();
-			});
+			}
+
+			element.on('click', incrementCount);
 
 			scope.$on('$destroy', function () {
-      	alert('About to be destroyed!');
+				// See Creating a Directive that Manipulates the DOM: https://docs.angularjs.org/guide/directive
+      	element.off();
       });
 		}
 	}
 }
+
+
 
 angular
 	.module('app')
